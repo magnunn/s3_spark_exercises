@@ -19,19 +19,22 @@ spark = SparkSession.builder.\
 spark
 
 sc = spark.sparkContext
-sc
 sc._jsc.hadoopConfiguration().set('fs.s3a.access.key','XXXXXXXXXXXXXx')
 sc._jsc.hadoopConfiguration().set('fs.s3a.secret.key','XXXXXXXXXXXXXXX')
 
 #df1 = spark.read.format('csv').load('s3a://databricks-exercise/products.csv')
-df_products = spark.read.format('csv').load('s3://databricks-exercise/products.csv')
+
+df_products = spark.read.format('csv').load('s3://databricks-exercise/products.csv',
+                                           header='true', 
+                                           inferSchema='true')
 df_products.show()
 
-df_products = spark.read.format('csv').load('s3://databricks-exercise/products.csv')
-df_products.show()
-
-df_sellers = spark.read.format('csv').load('s3://databricks-exercise/sellers.csv')
+df_sellers = spark.read.format('csv').load('s3://databricks-exercise/sellers.csv',
+                                           header='true', 
+                                           inferSchema='true')
 df_sellers.show()
 
-df_sales = spark.read.format('csv').load('s3://databricks-exercise/sales.csv')
+df_sales = spark.read.format('csv').load('s3://databricks-exercise/sales.csv',
+                                           header='true', 
+                                           inferSchema='true')
 df_sales.show()
