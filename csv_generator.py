@@ -22,8 +22,8 @@ def random_string(stringLength=10):
     return ''.join(random.sample(letters, stringLength))
 
 
-print("Products between {} and {}".format(1, 7500000))
-product_ids = [x for x in range(1, 7500000)]
+print("Products between {} and {}".format(1, 750000))
+product_ids = [x for x in range(1, 750000)]
 dates = ['2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08',
          '2020-07-09', '2020-07-10']
 seller_ids = [x for x in range(1, 10)]
@@ -50,7 +50,7 @@ df.columns = ["seller_id", "seller_name", "daily_target"]
 df.to_csv("sellers.csv", index=False)
 
 #   Generate sales
-total_rows = 500000
+total_rows = 100000
 prod_zero = int(total_rows * 0.95)
 prod_others = total_rows - prod_zero + 1
 df_array = [["order_id", "product_id", "seller_id", "date", "num_pieces_sold", "bill_raw_text"]]
@@ -64,7 +64,7 @@ for i in tqdm(range(0, 40)):
 
     for i in range(0, prod_zero):
         order_id += 1
-        df_array.append([order_id, 0, 0, random.choice(dates), random.randint(1, 100), random_string(500)])
+        df_array.append([order_id, 0, 0, random.choice(dates), random.randint(1, 100), random_string(50)])
 
     with open('sales.csv', 'a', newline='') as f:
         csvwriter = csv.writer(f)
@@ -75,7 +75,7 @@ for i in tqdm(range(0, 40)):
         order_id += 1
         df_array.append(
             [order_id, random.choice(product_ids), random.choice(seller_ids), random.choice(dates),
-             random.randint(1, 100), random_string(500)])
+             random.randint(1, 100), random_string(50)])
 
     with open('sales.csv', 'a', newline='') as f:
         csvwriter = csv.writer(f)
@@ -83,7 +83,7 @@ for i in tqdm(range(0, 40)):
 
 print("Done")
 
-spark = SparkSession.builder \
+"""spark = SparkSession.builder \
     .master("local") \
     .config("spark.sql.autoBroadcastJoinThreshold", -1) \
     .appName("Exercise1") \
@@ -105,4 +105,4 @@ sellers = spark.read.csv(
     "sellers.csv", header=True, mode="DROPMALFORMED"
 )
 sellers.show()
-sellers.write.parquet("sellers_parquet", mode="overwrite")
+sellers.write.parquet("sellers_parquet", mode="overwrite")"""
