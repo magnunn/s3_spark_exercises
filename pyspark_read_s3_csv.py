@@ -19,8 +19,8 @@ spark = SparkSession.builder.\
 spark #just to check it's info
 
 sc = spark.sparkContext
-sc._jsc.hadoopConfiguration().set('fs.s3a.access.key','AKIAU6ZYKR6F4L7ESDWL')
-sc._jsc.hadoopConfiguration().set('fs.s3a.secret.key','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')
+sc._jsc.hadoopConfiguration().set('fs.s3a.access.key','XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx')
+sc._jsc.hadoopConfiguration().set('fs.s3a.secret.key','XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx')
 
 #df1 = spark.read.format('csv').load('s3a://databricks-exercise/products.csv')
 
